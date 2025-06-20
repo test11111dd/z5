@@ -395,7 +395,7 @@ def get_fallback_scam_alerts():
             source="CoinDesk",
             timestamp=datetime.utcnow() - timedelta(minutes=60),
             severity="high",
-            link="https://www.coindesk.com/policy/2024/08/01/us-government-returns-12-8b-bitcoin-bitfinex-hack-victims/"
+            link="https://www.coindesk.com/policy/2024/08/01/us-government-returns-12-8b-bitcoin-bitfinex-hack-victims-settlement"
         ),
         ScamAlert(
             title="Poly Network Bridge Exploit: $611M Stolen Then Returned",
@@ -404,7 +404,7 @@ def get_fallback_scam_alerts():
             source="Decrypt",
             timestamp=datetime.utcnow() - timedelta(minutes=180),
             severity="high",
-            link="https://decrypt.co/77595/poly-network-hacker-returns-610-million-in-crypto"
+            link="https://decrypt.co/77595/poly-network-hacker-returns-610-million-in-crypto-after-exploit"
         ),
         ScamAlert(
             title="FTX Collapse Investigation: $8B in Customer Funds Missing",
@@ -413,7 +413,7 @@ def get_fallback_scam_alerts():
             source="Reuters",
             timestamp=datetime.utcnow() - timedelta(minutes=300),
             severity="high",
-            link="https://www.reuters.com/business/finance/ftx-founder-sam-bankman-fried-found-guilty-fraud-2023-11-02/"
+            link="https://www.reuters.com/business/finance/ftx-founder-sam-bankman-fried-found-guilty-fraud-2023-11-02-8-billion-missing"
         )
     ]
 
