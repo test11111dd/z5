@@ -337,17 +337,17 @@ backend:
           comment: "Successfully imported BitSafe crypto insurance repository from https://github.com/test11111dd/z3/. Repository includes comprehensive FastAPI backend with MongoDB integration, AI chat endpoints with Hugging Face integration, scam alert APIs, and status check endpoints. All dependencies installed and backend server running successfully."
 
 frontend:
-  - task: "Import GitHub repository z3 frontend"
+  - task: "Update live scam alerts with real data and clickable links"
     implemented: true
     working: true
-    file: "frontend/src/App.js"
+    file: "backend/server.py, frontend/src/App.js, frontend/src/App.css"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
         - working: true
           agent: "main"
-          comment: "Successfully imported BitSafe React frontend from repository. Application includes comprehensive crypto insurance landing page, AI premium calculator, blog system with 12 detailed articles, contact forms with EmailJS integration, AI chatbot for premium reduction, and live scam alert ticker. All dependencies installed with yarn and frontend running successfully."
+          comment: "Successfully updated live scam alert ticker to use real, recent crypto incidents with actual source links. Backend now fetches real data including WazirX hack ($230M), DMM Bitcoin closure ($320M), UwU Lend exploit ($20M), Radiant Capital hack ($50M), BingX breach ($43M), and recent phishing/scam incidents. Frontend updated to remove 'Source:' text, make each alert clickable with external link indicator (↗), and proper hover effects. All alerts link to legitimate news sources like CoinTelegraph, CoinDesk, Decrypt, Reuters, etc."
 
 metadata:
   created_by: "main_agent"
