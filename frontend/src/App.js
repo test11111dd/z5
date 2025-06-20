@@ -1001,7 +1001,13 @@ const MainContent = () => {
               ) : (
                 <div className="flex animate-scroll-left">
                   {scamAlerts.map((alert, index) => (
-                    <div key={index} className="flex items-center text-white text-sm whitespace-nowrap mr-12">
+                    <a 
+                      key={index} 
+                      href={alert.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center text-white text-sm whitespace-nowrap mr-12 hover:text-red-100 transition-colors cursor-pointer"
+                    >
                       <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
                         alert.severity === 'high' ? 'bg-red-400' : 
                         alert.severity === 'medium' ? 'bg-yellow-400' : 'bg-green-400'
@@ -1009,13 +1015,18 @@ const MainContent = () => {
                       <span className="font-semibold text-red-200">{alert.amount_lost}</span>
                       <span className="mx-2">•</span>
                       <span>{alert.title}</span>
-                      <span className="mx-2">•</span>
-                      <span className="text-red-300">Source: {alert.source}</span>
-                    </div>
+                      <span className="mx-1">↗</span>
+                    </a>
                   ))}
                   {/* Duplicate the alerts for seamless scrolling */}
                   {scamAlerts.map((alert, index) => (
-                    <div key={`duplicate-${index}`} className="flex items-center text-white text-sm whitespace-nowrap mr-12">
+                    <a 
+                      key={`duplicate-${index}`} 
+                      href={alert.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center text-white text-sm whitespace-nowrap mr-12 hover:text-red-100 transition-colors cursor-pointer"
+                    >
                       <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
                         alert.severity === 'high' ? 'bg-red-400' : 
                         alert.severity === 'medium' ? 'bg-yellow-400' : 'bg-green-400'
@@ -1023,9 +1034,8 @@ const MainContent = () => {
                       <span className="font-semibold text-red-200">{alert.amount_lost}</span>
                       <span className="mx-2">•</span>
                       <span>{alert.title}</span>
-                      <span className="mx-2">•</span>
-                      <span className="text-red-300">Source: {alert.source}</span>
-                    </div>
+                      <span className="mx-1">↗</span>
+                    </a>
                   ))}
                 </div>
               )}
