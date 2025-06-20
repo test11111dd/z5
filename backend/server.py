@@ -85,35 +85,39 @@ async def get_recent_scam_alerts():
     Get recent crypto scams and hacks from multiple sources
     """
     try:
+        print("=== SCAM ALERTS API CALLED ===")
         alerts = []
         
         # Source 1: Whale Alert API (large transactions that could be hacks)
         whale_alerts = await fetch_whale_alerts()
-        logger.info(f"Fetched {len(whale_alerts)} whale alerts")
+        print(f"Fetched {len(whale_alerts)} whale alerts")
         alerts.extend(whale_alerts)
         
         # Source 2: DeFi hacks/exploits 
         defi_alerts = await fetch_defi_exploits()
-        logger.info(f"Fetched {len(defi_alerts)} defi alerts")
+        print(f"Fetched {len(defi_alerts)} defi alerts")
         alerts.extend(defi_alerts)
         
         # Source 3: Recent scam patterns
         recent_scams = await fetch_recent_scam_patterns()
-        logger.info(f"Fetched {len(recent_scams)} recent scams")
+        print(f"Fetched {len(recent_scams)} recent scams")
         alerts.extend(recent_scams)
         
-        logger.info(f"Total alerts before sorting: {len(alerts)}")
+        print(f"Total alerts before sorting: {len(alerts)}")
         # Sort by timestamp (most recent first) and limit to 20
         alerts.sort(key=lambda x: x.timestamp, reverse=True)
         final_alerts = alerts[:20]
-        logger.info(f"Returning {len(final_alerts)} alerts")
+        print(f"Returning {len(final_alerts)} alerts")
+        if final_alerts:
+            print(f"First alert title: {final_alerts[0].title}")
+            print(f"First alert link: {final_alerts[0].link}")
         return final_alerts
         
     except Exception as e:
-        logger.error(f"Error fetching scam alerts: {str(e)}")
-        logger.error(f"Exception type: {type(e)}")
+        print(f"ERROR in scam alerts: {str(e)}")
+        print(f"Exception type: {type(e)}")
         import traceback
-        logger.error(f"Traceback: {traceback.format_exc()}")
+        print(f"Traceback: {traceback.format_exc()}")
         # Return fallback static alerts
         return get_fallback_scam_alerts()
 
