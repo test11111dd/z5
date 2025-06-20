@@ -264,7 +264,7 @@ input:focus, select:focus, textarea:focus {
 /* Scam Alert Ticker Animations */
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(-100%);
