@@ -321,7 +321,7 @@ agent_communication:
     - agent: "testing"
     - message: "Completed code review of the BitSafe crypto insurance website. All requested changes have been implemented correctly: 1) The condensed About Us section is present at the end of the homepage with the correct title, hero statement, 4 feature boxes, revolutionary approach text, and Read More button. 2) The About link in navigation correctly uses #about to scroll to the section instead of redirecting. 3) The Read More button correctly navigates to the full About page. 4) The code is free of compilation errors. 5) The layout appears well-structured and consistent with the existing design."
 
-user_problem_statement: "Import repository https://github.com/test11111dd/z3/ and replace current code so user can make changes to it"
+user_problem_statement: "Remove sources from live alerts bar and link each news to the page from where it was taken. All news should be real, recent and should have a clickable source link"
 
 backend:
   - task: "Import GitHub repository z3"
