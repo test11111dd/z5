@@ -275,8 +275,14 @@ input:focus, select:focus, textarea:focus {
   animation: scroll-left 60s linear infinite;
 }
 
+/* Only pause animation when hovering over the entire ticker container, not individual links */
 .animate-scroll-left:hover {
   animation-play-state: paused;
+}
+
+/* Ensure individual alert links don't affect the animation */
+.animate-scroll-left a:hover {
+  animation-play-state: running;
 }
 
 /* Risk level indicators */
