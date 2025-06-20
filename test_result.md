@@ -351,41 +351,17 @@ frontend:
 
 metadata:
   created_by: "main_agent"
-  version: "1.1"
+  version: "1.0"
   test_sequence: 0
   run_ui: false
 
 test_plan:
   current_focus:
-    - "AI Chat Endpoint Implementation"
+    - "Repository import completed successfully"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
     - agent: "main"
-      message: "Successfully enhanced the premium calculator with conversion optimization. Added prominent 'Get Insured Now' button with euro pricing, pulse animation, and smooth scroll to contact form. Improved contact section with insurance-focused messaging, process flow, and removed DAO references. Calculator now provides clear conversion path from quote to application."
-    - agent: "testing"
-      message: "Completed comprehensive testing of the BitSafe crypto insurance backend API. Created and enhanced backend_test.py to test all required endpoints. All tests are passing successfully. The backend API is robust and working correctly with MongoDB integration and proper CORS configuration. The API follows the /api prefix pattern for Kubernetes ingress as required."
-    - agent: "main"
-      message: "Repository successfully imported from https://github.com/test11111dd/3/. All dependencies installed for both backend and frontend. Services are running successfully - backend API accessible at localhost:8001/api/, frontend development server started. Application is ready for further modifications as requested by user."
-    - agent: "main"
-      message: "Updated all CTA buttons as requested by user. All 'Get Insured Now' buttons in navigation, hero section, and plan selection buttons now redirect to calculator section for better user flow. Users first calculate their premium before proceeding to contact. The quote result button still goes to contact form for final application after quote is generated."
-    - agent: "testing"
-      message: "Tested the BitSafe crypto insurance frontend application to verify button redirects. Found that the plan selection buttons ('Choose Basic', 'Choose Pro', 'Choose AI Pro') correctly scroll to the calculator section, but the 'Get Insured Now' buttons in the navigation bar and hero section do not work as expected. The scrollIntoView functionality appears to be implemented in the code but is not working properly for these buttons. The calculator form itself could not be fully tested due to issues with form interaction."
-    - agent: "main"
-      message: "Repository https://github.com/test11111dd/7 successfully imported and deployed. All files copied from imported repository to replace existing template. Dependencies installed for both backend (FastAPI with MongoDB) and frontend (React with Tailwind). All services restarted and running successfully. BitSafe crypto insurance platform is now fully operational and ready for requested modifications."
-    - agent: "main"
-      message: "Contact form EmailJS integration completed successfully. Updated with user-provided credentials: service_01o1oxs, template_75tin2c, public key EOqkhvyILTgDLTbMN. Contact form now properly initialized with EmailJS and configured to send customer inquiries to hello@bitsafe.ltd. Form includes validation, loading states, and proper error handling. Ready for testing."
-    - agent: "testing"
-      message: "Completed comprehensive testing of the BitSafe crypto insurance website. The blog system is working correctly - the featured article 'Why Crypto Insurance is Essential (A Beginner's Guide)' is displayed prominently on the homepage, and clicking on it navigates to the correct article page. The article content displays properly with all formatting and visual elements. The 'Back to Blog' button works correctly, and the blog page shows all 12 articles with the beginner's guide appearing first. Navigation links work properly with smooth scrolling to different sections. The 'Read More About Us' button in the About section correctly navigates to the full About page. The premium calculator is functional and allows users to input their wallet value and select options. All social media links in the navigation are present. Overall, the website is functioning as expected with no major issues."
-    - agent: "testing"
-      message: "Completed testing of the BitSafe crypto insurance backend API endpoints. All tests are passing successfully. The backend API is fully functional with proper API health checks, status endpoints (GET and POST /api/status), root endpoint (/api/), CORS configuration, and MongoDB connectivity. The backend is correctly running on port 8001 with the /api prefix as required. All endpoints return proper responses and are accessible from the frontend."
-    - agent: "main"
-      message: "Repository https://github.com/test11111dd/9 successfully imported and deployed. All files copied from imported repository to replace existing template. Dependencies installed for both backend (FastAPI with MongoDB) and frontend (React with Tailwind). All services restarted and running successfully. BitSafe crypto insurance platform is now fully operational and ready for requested modifications."
-    - agent: "testing"
-      message: "Completed comprehensive testing of the BitSafe crypto insurance backend API as requested. Created a new backend_test.py script that tests all required endpoints. All tests are passing successfully. The root endpoint (/api/) returns 'Hello World', status check endpoints (GET and POST /api/status) work correctly, MongoDB connectivity and data persistence are verified, CORS configuration is working properly, and the backend is accessible from the frontend URL configuration. The backend API is fully functional and ready to support the AI chatbot functionality in the frontend premium calculator."
-    - agent: "main"
-      message: "Successfully implemented AI chatbot risk assessment feature for premium optimization. Added 'Lower Your Premium' button below quote results that opens a floating, mobile-friendly chat widget. The AI chatbot asks 3 key risk assessment questions with immediate discounts: hardware wallet usage (40% off), DeFi permissions revoked (15% off), and stablecoin portfolio percentage (up to 10% off). Includes FAQ handling for common questions like 'What's covered?' and 'How to file a claim?'. Features typing indicators, interactive buttons/sliders, and accepts better rates with one-click. Simulated Google Sheets integration for underwriting team data collection. Ready for frontend testing to verify user experience and functionality."
-    - agent: "testing"
-      message: "Completed comprehensive testing of the new AI chat endpoint integration. Created and enhanced backend_test.py to test all aspects of the /api/chat endpoint. All tests passed successfully. The endpoint accepts the required JSON payload with user_info (name, email, phone) and message. Error handling for missing HF API key works correctly with fallback responses. Database storage of chat messages and AI responses verified. CORS headers are properly configured for frontend integration. The endpoint returns proper ChatResponse format with response and recommendations fields. The backend API is fully functional and ready to support the AI chatbot functionality in the frontend."
+      message: "Successfully imported BitSafe crypto insurance repository from https://github.com/test11111dd/z3/. Repository replaced all existing code. Application includes: 1) FastAPI backend with MongoDB integration, AI chat endpoints with Hugging Face integration, scam alert APIs with multiple data sources, and status check endpoints, 2) React frontend with comprehensive crypto insurance landing page including blog system with 12 articles, AI premium calculator, contact forms with EmailJS integration, live scam alert ticker, and AI chatbot for premium reduction, 3) All backend dependencies installed including aiohttp, 4) All frontend dependencies installed with yarn, 5) All services running successfully - backend API accessible, frontend running with hot reload. Application is fully operational and ready for user modifications."
