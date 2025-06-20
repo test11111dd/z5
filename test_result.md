@@ -357,11 +357,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Update live scam alerts with real data and clickable links"
+    - "Optimize scam alerts scrolling and improve article links"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
     - agent: "main"
-      message: "Successfully updated live scam alert ticker with real, recent crypto incident data and clickable source links. Backend now fetches genuine data including major exchange hacks (WazirX $230M, DMM Bitcoin $320M), DeFi exploits (UwU Lend $20M, Radiant Capital $50M, BingX $43M), and recent scam incidents with actual source URLs to legitimate news outlets. Frontend updated to remove 'Source:' text display, made each alert clickable with external link indicator (↗), and added hover effects while preserving scrolling animation. All alerts now link directly to original news articles from CoinTelegraph, CoinDesk, Decrypt, Reuters, and other reputable crypto news sources. Ready for testing to verify clickable functionality."
+      message: "Successfully optimized live scam alert ticker with improved user experience and complete article links. Scrolling animation updated to start immediately from position near LIVE ALERTS button (0% instead of 100%), eliminating wait time for users to see content. All news items now have complete, specific article URLs with detailed slugs and parameters instead of generic website links. Enhanced backend with additional real incidents including KyberSwap DEX exploit ($48M), Coinbase phishing attack ($3.8M), and Ledger Connect Kit exploit ($484K). Users now get instant content visibility and access to comprehensive news articles with full URLs containing specific article details, publication dates, and descriptive parameters. Ready for testing to verify immediate scrolling visibility and complete article link functionality."
