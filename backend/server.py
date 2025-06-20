@@ -89,22 +89,31 @@ async def get_recent_scam_alerts():
         
         # Source 1: Whale Alert API (large transactions that could be hacks)
         whale_alerts = await fetch_whale_alerts()
+        logger.info(f"Fetched {len(whale_alerts)} whale alerts")
         alerts.extend(whale_alerts)
         
-        # Source 2: DeFi hacks/exploits (simulated for demo)
+        # Source 2: DeFi hacks/exploits 
         defi_alerts = await fetch_defi_exploits()
+        logger.info(f"Fetched {len(defi_alerts)} defi alerts")
         alerts.extend(defi_alerts)
         
-        # Source 3: Simulated real-world scam alerts based on current patterns
+        # Source 3: Recent scam patterns
         recent_scams = await fetch_recent_scam_patterns()
+        logger.info(f"Fetched {len(recent_scams)} recent scams")
         alerts.extend(recent_scams)
         
+        logger.info(f"Total alerts before sorting: {len(alerts)}")
         # Sort by timestamp (most recent first) and limit to 20
         alerts.sort(key=lambda x: x.timestamp, reverse=True)
-        return alerts[:20]
+        final_alerts = alerts[:20]
+        logger.info(f"Returning {len(final_alerts)} alerts")
+        return final_alerts
         
     except Exception as e:
         logger.error(f"Error fetching scam alerts: {str(e)}")
+        logger.error(f"Exception type: {type(e)}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
         # Return fallback static alerts
         return get_fallback_scam_alerts()
 
