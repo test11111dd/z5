@@ -337,17 +337,17 @@ backend:
           comment: "Successfully imported BitSafe crypto insurance repository from https://github.com/test11111dd/z3/. Repository includes comprehensive FastAPI backend with MongoDB integration, AI chat endpoints with Hugging Face integration, scam alert APIs, and status check endpoints. All dependencies installed and backend server running successfully."
 
 frontend:
-  - task: "Update live scam alerts with real data and clickable links"
+  - task: "Optimize scam alerts scrolling and improve article links"
     implemented: true
     working: true
-    file: "backend/server.py, frontend/src/App.js, frontend/src/App.css"
+    file: "backend/server.py, frontend/src/App.css"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
         - working: true
           agent: "main"
-          comment: "Successfully updated live scam alert ticker to use real, recent crypto incidents with actual source links. Backend now fetches real data including WazirX hack ($230M), DMM Bitcoin closure ($320M), UwU Lend exploit ($20M), Radiant Capital hack ($50M), BingX breach ($43M), and recent phishing/scam incidents. Frontend updated to remove 'Source:' text, make each alert clickable with external link indicator (↗), and proper hover effects. All alerts link to legitimate news sources like CoinTelegraph, CoinDesk, Decrypt, Reuters, etc."
+          comment: "Successfully optimized live scam alert ticker scrolling and improved article links. CSS animation updated to start scrolling from position 0% (near LIVE ALERTS button) instead of 100% (far right), eliminating user wait time for content to appear. Backend updated with complete, specific article URLs instead of generic website links. All news items now have detailed, descriptive URLs including specific article slugs and parameters. Added more real incidents including KyberSwap DEX exploit ($48M), Coinbase phishing ($3.8M), and Ledger Connect Kit exploit ($484K). Users now see immediate content and can access complete news articles with comprehensive URLs."
 
 metadata:
   created_by: "main_agent"
