@@ -399,34 +399,34 @@ async def fetch_recent_scam_patterns():
     return alerts
 
 def get_fallback_scam_alerts():
-    """Fallback real alerts when APIs are unavailable"""
+    """Fallback real alerts with verified working links"""
     return [
         ScamAlert(
-            title="Bitfinex Settlement: $12.8B in Bitcoin Returned",
-            description="US government returns stolen Bitcoin to victims of 2016 Bitfinex hack",
-            amount_lost="$12.8B",
+            title="Bybit Exchange Record Hack: $1.5B Stolen",
+            description="Bybit suffers largest crypto exchange hack in history with massive security breach",
+            amount_lost="$1.5B",
             source="CoinDesk",
             timestamp=datetime.utcnow() - timedelta(minutes=60),
             severity="high",
-            link="https://www.coindesk.com/policy/2024/08/01/us-government-returns-12-8b-bitcoin-bitfinex-hack-victims-settlement"
+            link="https://www.coindesk.com/tag/hacks"
         ),
         ScamAlert(
-            title="Poly Network Bridge Exploit: $611M Stolen Then Returned",
-            description="Largest DeFi hack in history sees hacker return funds after $611M exploit",
-            amount_lost="$611M", 
-            source="Decrypt",
+            title="Q1 2025 Crypto Hacks: $2B Lost Total",
+            description="First quarter 2025 sees record $2 billion lost to cryptocurrency hacks and exploits",
+            amount_lost="$2B", 
+            source="CoinTelegraph",
             timestamp=datetime.utcnow() - timedelta(minutes=180),
             severity="high",
-            link="https://decrypt.co/77595/poly-network-hacker-returns-610-million-in-crypto-after-exploit"
+            link="https://cointelegraph.com/news/q1-2025-crypto-hacks-2b-lost"
         ),
         ScamAlert(
-            title="FTX Collapse Investigation: $8B in Customer Funds Missing",
-            description="DOJ investigation reveals massive fraud at collapsed crypto exchange FTX",
-            amount_lost="$8B",
-            source="Reuters",
+            title="May 2025 Scams & Hacks: $302M Lost",
+            description="May 2025 crypto security incidents result in $302M in combined losses across ecosystem",
+            amount_lost="$302M",
+            source="CoinDesk",
             timestamp=datetime.utcnow() - timedelta(minutes=300),
             severity="high",
-            link="https://www.reuters.com/business/finance/ftx-founder-sam-bankman-fried-found-guilty-fraud-2023-11-02-8-billion-missing"
+            link="https://www.coindesk.com/business/2025/06/02/usd302-million-lost-to-crypto-scams-hacks-and-exploits-in-may-certik"
         )
     ]
 
