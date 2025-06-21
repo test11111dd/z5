@@ -290,6 +290,221 @@ class BitSafeAPITester:
         except Exception as e:
             print(f"❌ Failed - Error: {str(e)}")
             return False, {}
+            
+    def test_scam_alerts_endpoint(self):
+        """Test the scam alerts endpoint"""
+        return self.run_test(
+            "Scam Alerts Endpoint",
+            "GET",
+            "scam-alerts",
+            200
+        )
+    
+    def test_scam_alerts_structure(self):
+        """Test that the scam alerts endpoint returns the correct data structure"""
+        self.tests_run += 1
+        print(f"\n🔍 Testing Scam Alerts Data Structure...")
+        
+        url = f"{self.base_url}/api/scam-alerts"
+        headers = {'Content-Type': 'application/json'}
+        
+        try:
+            response = requests.get(url, headers=headers)
+            
+            if response.status_code != 200:
+                print(f"❌ Failed - Scam alerts request failed with status {response.status_code}")
+                return False, {}
+            
+            try:
+                alerts = response.json()
+            except json.JSONDecodeError:
+                print("❌ Failed - Response is not valid JSON")
+                print(f"Response: {response.text}")
+                return False, {}
+            
+            if not isinstance(alerts, list):
+                print("❌ Failed - Response is not a list")
+                print(f"Response type: {type(alerts)}")
+                return False, {}
+            
+            if len(alerts) == 0:
+                print("❌ Failed - No scam alerts returned")
+                return False, {}
+            
+            print(f"✅ Found {len(alerts)} scam alerts")
+            
+            # Check that each alert has the required fields
+            required_fields = ['title', 'description', 'amount_lost', 'source', 'timestamp', 'severity', 'link']
+            valid_severities = ['high', 'medium', 'low']
+            
+            all_valid = True
+            for i, alert in enumerate(alerts):
+                missing_fields = [field for field in required_fields if field not in alert]
+                
+                if missing_fields:
+                    print(f"❌ Alert {i+1} is missing required fields: {', '.join(missing_fields)}")
+                    all_valid = False
+                    continue
+                
+                # Check severity is valid
+                if alert['severity'] not in valid_severities:
+                    print(f"❌ Alert {i+1} has invalid severity: {alert['severity']}")
+                    all_valid = False
+                
+                # Check timestamp is a valid date
+                try:
+                    # The timestamp comes as a string in ISO format
+                    if isinstance(alert['timestamp'], str):
+                        datetime.fromisoformat(alert['timestamp'].replace('Z', '+00:00'))
+                except (ValueError, TypeError):
+                    print(f"❌ Alert {i+1} has invalid timestamp: {alert['timestamp']}")
+                    all_valid = False
+            
+            if all_valid:
+                print("✅ All alerts have the required fields with valid values")
+                self.tests_passed += 1
+                return True, alerts
+            else:
+                return False, alerts
+            
+        except Exception as e:
+            print(f"❌ Failed - Error: {str(e)}")
+            return False, {}
+    
+    def test_scam_alerts_links(self):
+        """Test that all scam alert links are valid URLs pointing to real news sources"""
+        self.tests_run += 1
+        print(f"\n🔍 Testing Scam Alerts Links...")
+        
+        success, alerts = self.test_scam_alerts_endpoint()
+        
+        if not success or not alerts:
+            print("❌ Failed - Could not retrieve scam alerts")
+            return False, {}
+        
+        # Known crypto news domains
+        known_news_sources = [
+            'coindesk.com',
+            'cointelegraph.com',
+            'theblock.co',
+            'medium.com',
+            'chainalysis.com'
+        ]
+        
+        # URL validation regex pattern
+        url_pattern = re.compile(
+            r'^https?://'  # http:// or https://
+            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain
+            r'localhost|'  # localhost
+            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # or IP
+            r'(?::\d+)?'  # optional port
+            r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+        
+        all_valid = True
+        valid_links_count = 0
+        known_source_count = 0
+        
+        for i, alert in enumerate(alerts):
+            # Check if link field exists and is not empty
+            if 'link' not in alert or not alert['link']:
+                print(f"❌ Alert {i+1} ({alert.get('title', 'Unknown')}) has no link")
+                all_valid = False
+                continue
+            
+            link = alert['link']
+            
+            # Check if link is a valid URL
+            if not url_pattern.match(link):
+                print(f"❌ Alert {i+1} ({alert.get('title', 'Unknown')}) has invalid URL format: {link}")
+                all_valid = False
+                continue
+            
+            # Check if link points to a known crypto news source
+            is_known_source = any(source in link for source in known_news_sources)
+            if is_known_source:
+                known_source_count += 1
+            
+            # Verify the link is accessible (HEAD request to avoid downloading full content)
+            try:
+                head_response = requests.head(link, timeout=5, allow_redirects=True)
+                if head_response.status_code < 400:  # Any successful or redirect status
+                    valid_links_count += 1
+                    print(f"✅ Link verified: {link}")
+                else:
+                    print(f"❌ Alert {i+1} ({alert.get('title', 'Unknown')}) has inaccessible link: {link} (Status: {head_response.status_code})")
+                    all_valid = False
+            except requests.RequestException as e:
+                print(f"❌ Alert {i+1} ({alert.get('title', 'Unknown')}) link error: {link} - {str(e)}")
+                all_valid = False
+        
+        print(f"✅ {valid_links_count}/{len(alerts)} links are accessible")
+        print(f"✅ {known_source_count}/{len(alerts)} links point to known crypto news sources")
+        
+        if all_valid and valid_links_count == len(alerts):
+            print("✅ All scam alert links are valid and accessible")
+            self.tests_passed += 1
+            return True, {}
+        else:
+            success_rate = valid_links_count / len(alerts) if len(alerts) > 0 else 0
+            if success_rate >= 0.9:  # 90% success rate is acceptable
+                print("✅ Most scam alert links are valid (>90% success rate)")
+                self.tests_passed += 1
+                return True, {}
+            else:
+                return False, {}
+    
+    def test_scam_alerts_content(self):
+        """Test that scam alerts include current 2024-2025 crypto security incidents"""
+        self.tests_run += 1
+        print(f"\n🔍 Testing Scam Alerts Content...")
+        
+        success, alerts = self.test_scam_alerts_endpoint()
+        
+        if not success or not alerts:
+            print("❌ Failed - Could not retrieve scam alerts")
+            return False, {}
+        
+        # Keywords to look for in titles and descriptions
+        current_year_keywords = ['2024', '2025']
+        crypto_keywords = ['crypto', 'bitcoin', 'ethereum', 'defi', 'nft', 'wallet', 'exchange', 'token']
+        security_keywords = ['hack', 'scam', 'exploit', 'phishing', 'stolen', 'breach', 'attack', 'compromise']
+        
+        year_matches = 0
+        crypto_matches = 0
+        security_matches = 0
+        
+        for alert in alerts:
+            title = alert.get('title', '').lower()
+            description = alert.get('description', '').lower()
+            content = title + ' ' + description
+            
+            # Check for current year references
+            if any(year in content for year in current_year_keywords):
+                year_matches += 1
+            
+            # Check for crypto terminology
+            if any(keyword in content for keyword in crypto_keywords):
+                crypto_matches += 1
+            
+            # Check for security incident terminology
+            if any(keyword in content for keyword in security_keywords):
+                security_matches += 1
+        
+        print(f"✅ {year_matches}/{len(alerts)} alerts mention 2024-2025")
+        print(f"✅ {crypto_matches}/{len(alerts)} alerts contain crypto terminology")
+        print(f"✅ {security_matches}/{len(alerts)} alerts mention security incidents")
+        
+        # Criteria for passing: at least 80% of alerts should contain crypto and security keywords
+        # and at least some should mention current years
+        if (crypto_matches / len(alerts) >= 0.8 and 
+            security_matches / len(alerts) >= 0.8 and
+            year_matches > 0):
+            print("✅ Scam alerts contain relevant and current crypto security incidents")
+            self.tests_passed += 1
+            return True, {}
+        else:
+            print("❌ Some scam alerts may not be relevant or current")
+            return False, {}
 
 def main():
     # Setup
