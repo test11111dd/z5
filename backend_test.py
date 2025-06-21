@@ -524,6 +524,16 @@ def main():
     cors_success, _ = tester.test_cors_headers()
     db_success, _ = tester.test_database_storage()
     
+    # Run scam alerts tests
+    print("\n🔄 Running Scam Alerts API Tests...")
+    scam_alerts_success, _ = tester.test_scam_alerts_endpoint()
+    scam_alerts_structure_success, alerts = tester.test_scam_alerts_structure()
+    
+    # Only run these tests if we successfully got alerts
+    if scam_alerts_structure_success and alerts:
+        scam_alerts_links_success, _ = tester.test_scam_alerts_links()
+        scam_alerts_content_success, _ = tester.test_scam_alerts_content()
+    
     # Print results
     print(f"\n📊 Tests passed: {tester.tests_passed}/{tester.tests_run}")
     
