@@ -720,14 +720,16 @@ const MainContent = () => {
             description: "Users tricked into approving malicious contracts",
             amount_lost: "$123K",
             source: "Security Alert",
-            severity: "high"
+            severity: "high",
+            link: "https://www.coindesk.com/tag/hacks"
           },
           {
             title: "Discord Scam: Fake Support Bot - $89K Lost", 
             description: "Scammers impersonating official support",
             amount_lost: "$89K",
             source: "Community Alert", 
-            severity: "medium"
+            severity: "medium",
+            link: "https://cointelegraph.com/news/q1-2025-crypto-hacks-2b-lost"
           }
         ]);
       } finally {
